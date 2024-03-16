@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PublishChromeDriver>true</PublishChromeDriver>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,10 +10,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.18.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="122.0.6261.11100" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Elements\" />
   </ItemGroup>
 
 </Project>

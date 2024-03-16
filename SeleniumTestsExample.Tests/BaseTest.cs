@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumTestsExample.Framework;
+using SeleniumTestsExample.Tests.Steps;
 
 namespace SeleniumTestsExample.Tests
 {
@@ -19,6 +20,17 @@ namespace SeleniumTestsExample.Tests
                 new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json")
                     .Build());
+
+            services
+                .AddTransient<LoginPageSteps>()
+                .AddTransient<CommonSteps>();
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            Driver.Quit();
+            Driver.Close();
         }
     }
 }
