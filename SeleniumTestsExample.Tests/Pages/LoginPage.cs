@@ -17,6 +17,9 @@ namespace SeleniumTestsExample.Tests.Pages
         [FindsBy(How.Id, "login-button")]
         private IWebElement _loginButton;
 
+        [FindsBy(How.XPath, "//*[@data-test='error']")]
+        private IWebElement _errorMessage;
+
         public LoginPage(IWebDriver driver)
         {
             _pageLocator = By.Id("login_button_container");
@@ -45,6 +48,16 @@ namespace SeleniumTestsExample.Tests.Pages
         {
             _loginButton.Click();
             return this;
+        }
+
+        public bool IsErrorMessageDisplayed()
+        {
+            return _errorMessage.Displayed;
+        }
+
+        public string GetErrorMessageText()
+        {
+            return _errorMessage.Text;
         }
     }
 }

@@ -25,5 +25,15 @@ namespace SeleniumTestsExample.Tests.Steps
         {
             return _loginPage.IsOpened();
         }
+
+        public bool IsErrorMessageDisplayed()
+        {
+            return _loginPage.IsErrorMessageDisplayed();
+        }
+
+        public string GetErrorMesssageText()
+        {
+            return _loginPage.GetErrorMessageText();
+        }
     }
 }
