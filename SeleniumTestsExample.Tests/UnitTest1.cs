@@ -2,17 +2,13 @@ using NUnit.Framework;
 
 namespace SeleniumTestsExample.Tests
 {
-    public class Tests
+    public class Tests : BaseTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            Driver.Url = "https://www.saucedemo.com/";
+            Driver.Manage().Window.Maximize();
         }
     }
 }
