@@ -38,7 +38,14 @@ namespace SeleniumTestsExample.Tests.Elements.Pages
         /// <returns> Флаг видимости страницы логина. </returns>
         public bool IsOpened()
         {
-            return _pageElement.Displayed;
+            try
+            {
+                return _pageElement.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
 
         /// <summary>

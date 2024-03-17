@@ -40,7 +40,14 @@ namespace SeleniumTestsExample.Tests.Elements.Pages
         /// <returns> Флаг видимости страницы продуктов. </returns>
         public bool IsOpened()
         {
-            return _pageElement.Displayed;
+            try
+            {
+                return _pageElement.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
 
         /// <summary>

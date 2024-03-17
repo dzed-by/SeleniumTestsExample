@@ -26,7 +26,7 @@ namespace SeleniumTestsExample.Tests.Tests
         }
 
         /// <summary>
-        /// Тест на ошибку авторизации заблокированного опльзователя. Ожидается ошибка с опрделенным сообщением.
+        /// Тест на ошибку авторизации заблокированного пользователя. Ожидается ошибка с опрделенным сообщением.
         /// </summary>
         [Test]
         public void Login_LockedUserWithValidInput_ShouldShowErrorMessage()
@@ -36,12 +36,13 @@ namespace SeleniumTestsExample.Tests.Tests
             LoginPageSteps.EnterCredentialsAndLogin(Config["LockedUserLogin"], Config["Password"]);
 
             Logger.Information("Проверка отображения сообщения об ошибке и его содержание.");
+            Assert.IsFalse(ProductsPageSteps.IsPageOpened(), "Страница с продуктами не открыта при ошибке авторизации.");
             Assert.IsTrue(
                 LoginPageSteps.IsErrorMessageDisplayed(),
                 "При логине с заблокированным пользователем должно отобразиться сообщение об ошибке.");
 
             Assert.IsTrue(
-                LoginPageSteps.GetErrorMesssageText().Contains("user has been locked out"),
+                LoginPageSteps.GetErrorMesssageText().Equals("Epic sadface: Sorry, this user has been locked out."),
                 "При логине с заблокированным пользователем сообщение об ошибке должно быть соответствующим.");
         }
 
@@ -52,10 +53,10 @@ namespace SeleniumTestsExample.Tests.Tests
         /// <param name="userName"> Имя пользователя. </param>
         /// <param name="password"> Пароль. </param>
         /// <param name="errorMessageText"> Ожидаеммое сообщение об ошибке. </param>
-        [TestCase("abc", "", "Password is required")]
-        [TestCase("", "abc", "Username is required")]
-        [TestCase("", "", "Username is required")]
-        [TestCase("abc", "abc", " Username and password do not match any user in this service")]
+        [TestCase("abc", "", "Epic sadface: Password is required")]
+        [TestCase("", "abc", "Epic sadface: Username is required")]
+        [TestCase("", "", "Epic sadface: Username is required")]
+        [TestCase("abc", "abc", "Epic sadface: Username and password do not match any user in this service")]
         public void Login_LoginWithInValidInput_ShouldShowErrorMessage(
             string userName, string password, string errorMessageText)
         {
@@ -69,7 +70,7 @@ namespace SeleniumTestsExample.Tests.Tests
                 LoginPageSteps.IsErrorMessageDisplayed(),
                 "При логине с неверными данными, должно отобразится сообщение об ошибке.");
             Assert.IsTrue(
-                LoginPageSteps.GetErrorMesssageText().Contains(errorMessageText),
+                LoginPageSteps.GetErrorMesssageText().Equals(errorMessageText),
                 "При логине с неверными данными, сообщение об ошибке должно быть соответствующим.");
         }
     }
